@@ -35,10 +35,7 @@ jobs:
           java-version: 17
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Accept Android SDK licenses
-        run: yes | sdkmanager --licenses
+        uses: android-actions/setup-android@v4
 
       - name: Sync Capacitor
         run: npx cap sync android
