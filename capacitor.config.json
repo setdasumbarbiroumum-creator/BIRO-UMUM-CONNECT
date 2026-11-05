@@ -1,0 +1,6 @@
+{
+  "appId": "id.go.sumbar.biroumumconnect",
+  "appName": "Biro Umum Connect",
+  "webDir": "dist",
+  "server": { "androidScheme": "https" }
+}
