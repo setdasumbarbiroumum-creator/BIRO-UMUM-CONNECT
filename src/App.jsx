@@ -29,11 +29,43 @@ export default function App() {
   const fileRef = useRef(null)
   const bottomRef = useRef(null)
 
+  
   useEffect(() => {
-    if (!supabase) { setLoading(false); return }
-    supabase.auth.getSession().then(({data}) => setSession(data.session))
-    const {data:{subscription}} = supabase.auth.onAuthStateChange((_event,s) => setSession(s))
-    return () => subscription.unsubscribe()
+    if (!supabase) {
+      setLoading(false)
+      return
+    }
+
+    let mounted = true
+
+    supabase.auth.getSession()
+      .then(({ data, error }) => {
+        if (!mounted) return
+
+        if (error) {
+          setError('Gagal memuat sesi login. Silakan buka ulang aplikasi.')
+        }
+
+        setSession(data?.session ?? null)
+        setLoading(false)
+      })
+      .catch(() => {
+        if (!mounted) return
+        setError('Koneksi aplikasi gagal. Periksa jaringan internet.')
+        setLoading(false)
+      })
+
+    const { data: { subscription } } =
+      supabase.auth.onAuthStateChange((_event, s) => {
+        if (!mounted) return
+        setSession(s)
+        setLoading(false)
+      })
+
+    return () => {
+      mounted = false
+      subscription.unsubscribe()
+    }
   }, [])
 
   useEffect(() => {
