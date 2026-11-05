@@ -1,0 +1,10 @@
+{
+  "name": "BIRO UMUM CONNECT",
+  "short_name": "Biro Connect",
+  "description": "Komunikasi internal Biro Umum Setda Provinsi Sumatera Barat",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f6f8",
+  "theme_color": "#14263d",
+  "icons": []
+}
